@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 const db = require("./app/models");
 //sync creates the table if it doesn't exist (and does nothing if it already exists)
-//db.sequelize.sync();
+db.sequelize.sync();
 // routes
 app.use('/api/auth', auth);
 app.use('/api/authors', author);
