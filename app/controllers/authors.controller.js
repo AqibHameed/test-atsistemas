@@ -3,6 +3,7 @@ const Book = db.book
 const Author = db.author
 const csv = require('csv-parser');
 const fs = require('fs');
+const logger = require('../../logger')
 exports.index = (req, res) => {
     // Fetch all authors
     Author.findAll()
@@ -12,6 +13,7 @@ exports.index = (req, res) => {
         }); 
       }).catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
       });
 
   };
@@ -42,7 +44,8 @@ exports.create =  (req, res) => {
               })
           .on('end', () => {
               res.status(201).send({ message: "Authors are created successfully!"});   
-          });
+              logger.info('Authors are created successfully!');
+            });
 
 };
 
@@ -61,10 +64,12 @@ exports.show = (req, res) => {
                 })
                 .catch(err => {
                      res.status(500).send({ message: err.message });
+                     logger.error(err.message);
                 });
       })
       .catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
       });
   };
 
@@ -87,18 +92,22 @@ exports.show = (req, res) => {
                         if(req.body.bookIds){
                             author.setBooks([req.body.bookIds]).then(() => {
                                 res.send({ message: "Author and its book relationships are updated successfully" });
+                                logger.info('Author and its book relationships are updated successfully');
                               });
                         }else{
                              res.send({ message: "Author is updated successfully!" });
+                             logger.info('Author is updated successfully!');
                         }
                         
                 })
                 .catch(err => {
                     res.status(500).send({ message: err.message });
+                    logger.error(err.message);
                 }); 
       })
       .catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
       });
     
   };
@@ -111,8 +120,10 @@ exports.show = (req, res) => {
     })
     .then(function() {
             res.send({ message: "Author is deleted successfully!" });
+            logger.info('Author is deleted successfully!');
     })
     .catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
     });
   };

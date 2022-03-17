@@ -4,6 +4,7 @@ const User = db.user;
 const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const logger = require('../../logger')
 exports.signup = (req, res) => {
   // intialize the User
   const user = new User({
@@ -15,9 +16,11 @@ exports.signup = (req, res) => {
   user.save()
     .then(user => {
        res.send({ message: "User was registered successfully!" }); 
+       logger.info('User was registered successfully!');
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
+      logger.error(err.message);
     });
 };
 exports.signin = (req, res) => {
@@ -53,5 +56,6 @@ exports.signin = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
+      logger.error(err.message);
     });
 };

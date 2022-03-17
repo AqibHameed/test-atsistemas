@@ -1,0 +1,8 @@
+{"level":"error","message":"Validation error","timestamp":"2022-03-17T02:35:29.381Z"}
+{"level":"info","message":"User was registered successfully!","timestamp":"2022-03-17T02:39:49.290Z"}
+{"level":"info","message":"Author and its book relationships are updated successfully","timestamp":"2022-03-17T02:53:46.098Z"}
+{"level":"info","message":"Book and its authors relationships are updated successfully","timestamp":"2022-03-17T02:58:10.848Z"}
+{"level":"info","message":"Server is running on port 8080.","timestamp":"2022-03-17T03:03:35.592Z"}
+{"level":"info","message":"Server is running on port 8080.","timestamp":"2022-03-17T03:03:40.546Z"}
+{"level":"info","message":"Book and its authors relationships are updated successfully","timestamp":"2022-03-17T03:03:53.022Z"}
+{"level":"info","message":"Server is running on port 8080.","timestamp":"2022-03-17T03:04:14.774Z"}

@@ -3,6 +3,7 @@ const Book = db.book
 const Author = db.author
 const csv = require('csv-parser');
 const fs = require('fs');
+const logger = require('../../logger')
 exports.index = (req, res) => {
     // find Author on the basis of the Id
     Author.findByPk(req.authorId)
@@ -17,6 +18,7 @@ exports.index = (req, res) => {
                 })
                 .catch(err => {
                   res.status(500).send({ message: err.message });
+                  logger.error(err.message);
                 });           
           }else{
             return res.status(404).send({
@@ -28,6 +30,7 @@ exports.index = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
+      logger.error(err.message);
     });
   
   };
@@ -58,6 +61,7 @@ exports.create =  (req, res) => {
           })
           .on('end', () => {  
               res.status(201).send({ message: "Books are created successfully!"})
+              logger.info('Books are created successfully!');
           });
 };
 
@@ -76,10 +80,12 @@ exports.show = (req, res) => {
                 })
                 .catch(err => {
                      res.status(500).send({ message: err.message });
+                     logger.error(err.message);
                 }); 
       })
       .catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
       });
   };
 
@@ -103,19 +109,23 @@ exports.show = (req, res) => {
                         if(req.body.authorIds){
                             book.setAuthors(req.body.authorIds).then(() => {
                                 res.send({ message: "Book and its authors relationships are updated successfully" });
+                                logger.info('Book and its authors relationships are updated successfully');
                               });
               
                         }else{
                            res.send({ message: "Book is updated successfully!" });
+                           logger.info('Book is updated successfully!');
                         }
                         //res.send({ message: "Book is updated successfully!" });
                 })
                 .catch(err => {
                     res.status(500).send({ message: err.message });
+                    logger.error(err.message);
                 }); 
       })
       .catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
       });
     
     
@@ -129,8 +139,10 @@ exports.show = (req, res) => {
     })
     .then(function() {
             res.send({ message: "Book is deleted successfully!" });
+            logger.info('Book is deleted successfully!');
     })
     .catch(err => {
         res.status(500).send({ message: err.message });
+        logger.error(err.message);
     });
   };
